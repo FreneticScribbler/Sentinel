@@ -29,5 +29,6 @@ public class DiscordSentinel {
 	public static void registerListeners() {
 		EventDispatcher dispatcher = INSTANCE.getDispatcher();
 		dispatcher.registerListener(new CommandListener());
+		CommandListener.initTextCommands();
 	}
 }
