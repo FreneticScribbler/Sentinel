@@ -10,6 +10,7 @@ public class DiscordSentinel {
 	public static IDiscordClient INSTANCE;
 
 	public static void start(String token) {
+		StorageHandler.readDataFromDisk();
 		login(token);
 		registerListeners();
 	}
