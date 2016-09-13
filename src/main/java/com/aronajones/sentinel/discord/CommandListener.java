@@ -47,6 +47,15 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 						e.printStackTrace();
 					}
 				}
+				else if(args[0].equalsIgnoreCase("quit")) {
+					try {
+						event.getClient().logout();
+					}
+					catch(RateLimitException | DiscordException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
 				else
 					commandUnrecognised(user, channel);
 			}
@@ -54,7 +63,7 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 				// TODO User validation
 				if(args[0].equalsIgnoreCase("getpoints")) {
 					String username = args[1];
-					int points = (int) StorageHandler.points.get(username);
+					int points = Integer.parseInt(StorageHandler.points.getProperty(username));
 
 					try {
 						channel.sendMessage("User has: " + points + " points");
@@ -86,7 +95,7 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 			}
 			else if(args.length == 3) {
 				if(args[0].equalsIgnoreCase("setpoints")) {
-					StorageHandler.points.put(args[1], Integer.parseInt(args[2]));
+					StorageHandler.points.setProperty(args[1], args[2]);
 				}
 				else
 					commandUnrecognised(user, channel);

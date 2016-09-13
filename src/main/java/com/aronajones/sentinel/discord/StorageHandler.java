@@ -16,7 +16,7 @@ public class StorageHandler {
 	public static void writeDataToDisk() {
 		System.out.println(points.toString());
 		try {
-			points.storeToXML(new FileOutputStream("data.xml"), "something");
+			points.storeToXML(new FileOutputStream("data.xml"), null);
 		}
 		catch(IOException e) {
 			e.printStackTrace();
