@@ -27,6 +27,7 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 		textCommandsList.put("evillaugh", "MUAHAHAHAHAHAHAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAA");
 	}
 
+	// TODO Cleanup try/catch
 	@Override
 	public void handle(MessageReceivedEvent event) {
 		IMessage message = event.getMessage();
@@ -46,17 +47,6 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 						e.printStackTrace();
 					}
 				}
-				else if(args[0].equalsIgnoreCase("imperium")) {
-					try {
-						channel.sendMessage(StorageHandler.choose(new File("imperium.txt")));
-					}
-					catch(MissingPermissionsException | RateLimitException | DiscordException e) {
-						e.printStackTrace();
-					}
-					catch(FileNotFoundException e) {
-						e.printStackTrace();
-					}
-				}
 				else
 					commandUnrecognised(user, channel);
 			}
@@ -70,6 +60,24 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 						channel.sendMessage("User has: " + points + " points");
 					}
 					catch(MissingPermissionsException | RateLimitException | DiscordException e) {
+						e.printStackTrace();
+					}
+				}
+				else if(args[0].equalsIgnoreCase("quote")) {
+					try {
+						channel.sendMessage(StorageHandler.choose(new File(args[1] + ".txt")));
+					}
+					catch(MissingPermissionsException | RateLimitException | DiscordException e) {
+						e.printStackTrace();
+					}
+					catch(FileNotFoundException e) {
+						try {
+							channel.sendMessage("Error: Quote file not found.");
+						}
+						catch(MissingPermissionsException | RateLimitException | DiscordException e1) {
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
+						}
 						e.printStackTrace();
 					}
 				}
@@ -89,7 +97,7 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 
 	private void commandUnrecognised(IUser user, IChannel channel) {
 		try {
-			channel.sendMessage(user.getName() + ": Command not found.");
+			channel.sendMessage("Error: Command not found.");
 		}
 		catch(MissingPermissionsException | RateLimitException | DiscordException e) {
 			e.printStackTrace();
