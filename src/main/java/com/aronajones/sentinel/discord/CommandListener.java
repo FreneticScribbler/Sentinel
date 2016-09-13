@@ -1,5 +1,7 @@
 package com.aronajones.sentinel.discord;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -44,18 +46,25 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 						e.printStackTrace();
 					}
 				}
+				else if(args[0].equalsIgnoreCase("imperium")) {
+					try {
+						channel.sendMessage(StorageHandler.choose(new File("imperium.txt")));
+					}
+					catch(MissingPermissionsException | RateLimitException | DiscordException e) {
+						e.printStackTrace();
+					}
+					catch(FileNotFoundException e) {
+						e.printStackTrace();
+					}
+				}
 				else
 					commandUnrecognised(user, channel);
 			}
 			else if(args.length == 2) {
 				// TODO User validation
-				if(args[0] == "getpoints") {
+				if(args[0].equalsIgnoreCase("getpoints")) {
 					String username = args[1];
-					Integer points = (Integer) StorageHandler.points.get(username);
-
-					if(points == null) {
-						points = 0;
-					}
+					int points = (int) StorageHandler.points.get(username);
 
 					try {
 						channel.sendMessage("User has: " + points + " points");
@@ -68,9 +77,8 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 					commandUnrecognised(user, channel);
 			}
 			else if(args.length == 3) {
-				if(args[0] == "setpoints") {
-					StorageHandler.points.put(args[1], args[2]);
-					StorageHandler.writeDataToDisk();
+				if(args[0].equalsIgnoreCase("setpoints")) {
+					StorageHandler.points.put(args[1], Integer.parseInt(args[2]));
 				}
 				else
 					commandUnrecognised(user, channel);

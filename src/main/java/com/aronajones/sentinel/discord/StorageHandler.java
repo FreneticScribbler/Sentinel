@@ -1,20 +1,22 @@
 package com.aronajones.sentinel.discord;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Properties;
+import java.util.Random;
+import java.util.Scanner;
 
 public class StorageHandler {
 
-	public static Map<Object, Object> points = new HashMap<Object, Object>();
-	private static Properties properties = new Properties();
+	static Properties points = new Properties();
 
 	public static void writeDataToDisk() {
-		properties.putAll(points);
+		System.out.println(points.toString());
 		try {
-			properties.store(new FileOutputStream("data.properties"), null);
+			points.storeToXML(new FileOutputStream("data.xml"), "something");
 		}
 		catch(IOException e) {
 			e.printStackTrace();
@@ -22,6 +24,26 @@ public class StorageHandler {
 	}
 
 	public static void readDataFromDisk() {
-		points = new HashMap<Object, Object>(properties);
+		System.out.println("attempting read");
+		try {
+			points.loadFromXML(new FileInputStream("data.xml"));
+		}
+		catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static String choose(File f) throws FileNotFoundException {
+		String result = null;
+		Random rand = new Random();
+		int n = 0;
+		for(Scanner sc = new Scanner(f); sc.hasNext();) {
+			++n;
+			String line = sc.nextLine();
+			if(rand.nextInt(n) == 0)
+				result = line;
+		}
+
+		return result;
 	}
 }

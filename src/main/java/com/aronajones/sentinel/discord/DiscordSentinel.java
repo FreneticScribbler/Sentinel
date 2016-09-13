@@ -31,5 +31,7 @@ public class DiscordSentinel {
 		EventDispatcher dispatcher = INSTANCE.getDispatcher();
 		dispatcher.registerListener(new CommandListener());
 		CommandListener.initTextCommands();
+		// TODO dispatcher.registerListener(new ConnectionListener());
+		dispatcher.registerListener(new DisconnectionListener());
 	}
 }
