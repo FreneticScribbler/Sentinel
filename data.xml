@@ -2,4 +2,5 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 <entry key="test2">56</entry>
+<entry key="warlordjones">2147483648</entry>
 </properties>
