@@ -14,6 +14,7 @@ public class CommandRegistry {
 		CommandRegistry.registerCommand("disapprove", new TextCommand("ಠ_ಠ"));
 		CommandRegistry.registerCommand("evillaugh", new TextCommand("MUAHAHAHAHAHAHAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAA"));
 		CommandRegistry.registerCommand("hug", new TextCommand("(>^_^)> <(^.^<)"));
+		CommandRegistry.registerCommand("rule", new CommandRules());
 	}
 
 	public static void registerCommand(String name, ICommand command) {
