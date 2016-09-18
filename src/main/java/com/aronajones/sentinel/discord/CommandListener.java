@@ -25,6 +25,7 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 		textCommandsList.put("lenny", "( ͡° ͜ʖ ͡°)");
 		textCommandsList.put("disapprove", "ಠ_ಠ");
 		textCommandsList.put("evillaugh", "MUAHAHAHAHAHAHAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAA");
+		textCommandsList.put("hug", "(>^_^)> <(^.^<)");
 	}
 
 	// TODO Cleanup try/catch
