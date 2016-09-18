@@ -24,6 +24,8 @@ public class CommandRegistry {
 				new TextCommand("Running " + Sentinel.NAME + " v" + Sentinel.VERSION));
 		CommandRegistry.registerCommand("exterminatus", new TextCommand(
 				"Some may question your right to destroy ten billion people. Those who understand know that you have no right to let them live — Exterminatus Extremis http://vignette1.wikia.nocookie.net/warhammer40k/images/e/e9/Exterminatus_Retribution.jpg/revision/latest?cb=20130419190839"));
+		CommandRegistry.registerCommand("death",
+				new TextCommand("http://static.tvtropes.org/pmwiki/pub/images/deathwithcat_8690.jpg"));
 	}
 
 	public static void registerCommand(String name, ICommand command) {
