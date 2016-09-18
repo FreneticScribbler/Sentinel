@@ -1,11 +1,11 @@
 package com.aronajones.sentinel.discord;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.Arrays;
 
 import com.aronajones.sentinel.Sentinel;
+import com.aronajones.sentinel.commands.CommandRegistry;
+import com.aronajones.sentinel.commands.EnumCommandType;
+import com.aronajones.sentinel.commands.ICommand;
 
 import sx.blah.discord.api.events.IListener;
 import sx.blah.discord.handle.impl.events.MessageReceivedEvent;
@@ -17,17 +17,6 @@ import sx.blah.discord.util.MissingPermissionsException;
 import sx.blah.discord.util.RateLimitException;
 
 public class CommandListener implements IListener<MessageReceivedEvent> {
-
-	public static Map<String, String> textCommandsList = new HashMap<String, String>();
-
-	public static void initTextCommands() {
-		textCommandsList.put("boop", "Beep");
-		textCommandsList.put("lenny", "( ͡° ͜ʖ ͡°)");
-		textCommandsList.put("disapprove", "ಠ_ಠ");
-		textCommandsList.put("evillaugh", "MUAHAHAHAHAHAHAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAA");
-		textCommandsList.put("hug", "(>^_^)> <(^.^<)");
-	}
-
 	// TODO Cleanup try/catch
 	@Override
 	public void handle(MessageReceivedEvent event) {
@@ -37,77 +26,55 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 		IUser user = message.getAuthor();
 
 		if(content.startsWith(Sentinel.COMMAND_CHARACTER.toString())) {
-			String command = content.substring(1);
-			String[] args = command.split(" ");
-			if(args.length == 1) {
-				if(textCommandsList.get(args[0]) != null) {
-					try {
-						channel.sendMessage(textCommandsList.get(args[0]));
-					}
-					catch(MissingPermissionsException | RateLimitException | DiscordException e) {
-						e.printStackTrace();
-					}
-				}
-				else if(args[0].equalsIgnoreCase("quit")) {
-					try {
-						event.getClient().logout();
-					}
-					catch(RateLimitException | DiscordException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-				}
-				else
-					commandUnrecognised(user, channel);
-			}
-			else if(args.length == 2) {
-				// TODO User validation
-				if(args[0].equalsIgnoreCase("getpoints")) {
-					String username = args[1];
-					int points = Integer.parseInt(StorageHandler.points.getProperty(username));
+			String input = content.substring(1);
+			String[] args = input.split(" ");
+			String command = args[0];
+			String[] parameters = Arrays.copyOfRange(args, 1, args.length);
 
-					try {
-						channel.sendMessage("User has: " + points + " points");
-					}
-					catch(MissingPermissionsException | RateLimitException | DiscordException e) {
-						e.printStackTrace();
-					}
+			if(command == "quit") {
+				try {
+					event.getClient().logout();
 				}
-				else if(args[0].equalsIgnoreCase("quote")) {
-					try {
-						channel.sendMessage(StorageHandler.choose(new File(args[1] + ".txt")));
-					}
-					catch(MissingPermissionsException | RateLimitException | DiscordException e) {
-						e.printStackTrace();
-					}
-					catch(FileNotFoundException e) {
+				catch(RateLimitException | DiscordException e) {
+					e.printStackTrace();
+				}
+			}
+
+			if(CommandRegistry.getCommand(command) != null) {
+				ICommand icommand = CommandRegistry.getCommand(command);
+				if(parameters.length == icommand.getNumberOfParameters()) {
+					if(icommand.getCommandType() == EnumCommandType.STRING) {
 						try {
-							channel.sendMessage("Error: Quote file not found.");
+							channel.sendMessage((String) icommand.getCommandResult(parameters));
 						}
-						catch(MissingPermissionsException | RateLimitException | DiscordException e1) {
-							// TODO Auto-generated catch block
-							e1.printStackTrace();
+						catch(MissingPermissionsException | RateLimitException | DiscordException e) {
+							e.printStackTrace();
 						}
-						e.printStackTrace();
 					}
+					// TODO
+					else
+						commandUnrecognised(user, channel);
 				}
 				else
-					commandUnrecognised(user, channel);
+					incorrectParameters(user, channel);
 			}
-			else if(args.length == 3) {
-				if(args[0].equalsIgnoreCase("setpoints")) {
-					StorageHandler.points.setProperty(args[1], args[2]);
-				}
-				else
-					commandUnrecognised(user, channel);
-			}
-
 		}
 	}
+
+	// TODO
 
 	private void commandUnrecognised(IUser user, IChannel channel) {
 		try {
 			channel.sendMessage("Error: Command not found.");
+		}
+		catch(MissingPermissionsException | RateLimitException | DiscordException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void incorrectParameters(IUser user, IChannel channel) {
+		try {
+			channel.sendMessage("Error: Command parameters incorrect.");
 		}
 		catch(MissingPermissionsException | RateLimitException | DiscordException e) {
 			e.printStackTrace();

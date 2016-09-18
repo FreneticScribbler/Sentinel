@@ -1,11 +1,8 @@
 package com.aronajones.sentinel.commands;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-
 import com.aronajones.sentinel.utils.StorageHandler;
 
-public class CommandQuote extends BaseCommand {
+public class CommandGetPoints extends BaseCommand {
 
 	@Override
 	public EnumCommandType getCommandType() {
@@ -19,12 +16,7 @@ public class CommandQuote extends BaseCommand {
 
 	@Override
 	public Object getCommandResult(String[] parameters) {
-		try {
-			return StorageHandler.choose(new File(parameters[0] + ".txt"));
-		}
-		catch(FileNotFoundException e) {
-			return "Error: Quote file not found.";
-		}
+		return "User has: " + Integer.parseInt(StorageHandler.points.getProperty(parameters[0])) + " points";
 	}
 
 }

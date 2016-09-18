@@ -1,5 +1,7 @@
 package com.aronajones.sentinel.discord;
 
+import com.aronajones.sentinel.utils.StorageHandler;
+
 import sx.blah.discord.api.ClientBuilder;
 import sx.blah.discord.api.IDiscordClient;
 import sx.blah.discord.api.events.EventDispatcher;
@@ -30,8 +32,7 @@ public class DiscordSentinel {
 	public static void registerListeners() {
 		EventDispatcher dispatcher = INSTANCE.getDispatcher();
 		dispatcher.registerListener(new CommandListener());
-		CommandListener.initTextCommands();
-		dispatcher.registerListener(new ConnectionListener());
+		// dispatcher.registerListener(new ConnectionListener());
 		dispatcher.registerListener(new DisconnectionListener());
 	}
 }

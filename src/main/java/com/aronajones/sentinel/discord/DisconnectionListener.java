@@ -1,5 +1,7 @@
 package com.aronajones.sentinel.discord;
 
+import com.aronajones.sentinel.utils.StorageHandler;
+
 import sx.blah.discord.api.events.IListener;
 import sx.blah.discord.handle.impl.events.DiscordDisconnectedEvent;
 import sx.blah.discord.handle.obj.IChannel;

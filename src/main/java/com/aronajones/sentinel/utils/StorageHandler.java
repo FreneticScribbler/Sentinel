@@ -1,4 +1,4 @@
-package com.aronajones.sentinel.discord;
+package com.aronajones.sentinel.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class StorageHandler {
 
-	static Properties points = new Properties();
+	public static Properties points = new Properties();
 
 	public static void writeDataToDisk() {
 		System.out.println(points.toString());

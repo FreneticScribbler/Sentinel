@@ -5,12 +5,23 @@ import java.util.HashMap;
 public class CommandRegistry {
 	private static HashMap<String, ICommand> commands = new HashMap<String, ICommand>();
 
-	public void registerCommand(String name, ICommand command) {
+	static {
+		CommandRegistry.registerCommand("quote", new CommandQuote());
+		CommandRegistry.registerCommand("getpoints", new CommandGetPoints());
+		CommandRegistry.registerCommand("setpoints", new CommandSetPoints());
+		CommandRegistry.registerCommand("boop", new TextCommand("Beep"));
+		CommandRegistry.registerCommand("lenny", new TextCommand("( ͡° ͜ʖ ͡°)"));
+		CommandRegistry.registerCommand("disapprove", new TextCommand("ಠ_ಠ"));
+		CommandRegistry.registerCommand("evillaugh", new TextCommand("MUAHAHAHAHAHAHAHAHAHAAAAAAAAAAAAAAAAAAAAAAAAA"));
+		CommandRegistry.registerCommand("hug", new TextCommand("(>^_^)> <(^.^<)"));
+	}
+
+	public static void registerCommand(String name, ICommand command) {
 		// TODO Duplicate checking
 		commands.putIfAbsent(name, command);
 	}
 
-	public ICommand getCommand(String name) {
+	public static ICommand getCommand(String name) {
 		return commands.get(name);
 	}
 }
