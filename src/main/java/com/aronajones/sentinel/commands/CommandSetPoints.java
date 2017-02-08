@@ -29,4 +29,9 @@ public class CommandSetPoints extends BaseCommand {
 
 	}
 
+	@Override
+	public EnumPermissionsLevel getRequiredPermissionLevel() {
+		return EnumPermissionsLevel.CREATOR;
+	}
+
 }

@@ -21,9 +21,9 @@ public class CommandHelp extends BaseCommand {
 		ArrayList<String> result = new ArrayList<String>();
 		for(String key : CommandRegistry.getAllCommands().keySet()) {
 			result.add(key);
-			result.add(", ");
 		}
-		return result;
+		System.out.println(CommandRegistry.getAllCommands().keySet().toString());
+		return result.toString();
 	}
 
 }

@@ -6,4 +6,6 @@ public interface ICommand {
 	public int getNumberOfParameters();
 
 	Object getCommandResult(String[] parameters);
+
+	public EnumPermissionsLevel getRequiredPermissionLevel();
 }

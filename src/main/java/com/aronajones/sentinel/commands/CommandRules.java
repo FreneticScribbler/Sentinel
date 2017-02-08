@@ -28,4 +28,9 @@ public class CommandRules extends BaseCommand {
 		}
 	}
 
+	@Override
+	public EnumPermissionsLevel getRequiredPermissionLevel() {
+		return EnumPermissionsLevel.CREATOR;
+	}
+
 }

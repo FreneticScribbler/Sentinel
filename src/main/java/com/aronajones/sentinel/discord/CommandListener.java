@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.aronajones.sentinel.Sentinel;
 import com.aronajones.sentinel.commands.CommandRegistry;
 import com.aronajones.sentinel.commands.EnumCommandType;
+import com.aronajones.sentinel.commands.EnumPermissionsLevel;
 import com.aronajones.sentinel.commands.ICommand;
 
 import sx.blah.discord.api.events.IListener;
@@ -25,6 +26,8 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 		IChannel channel = message.getChannel();
 		IUser user = message.getAuthor();
 
+		// TODO allow commands anywhere within text strings
+
 		if(content.startsWith(Sentinel.COMMAND_CHARACTER.toString())) {
 			String input = content.substring(1);
 			String[] args = input.split(" ");
@@ -42,6 +45,19 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 
 			if(CommandRegistry.getCommand(command) != null) {
 				ICommand icommand = CommandRegistry.getCommand(command);
+				// TODO There's gotta be a better way
+				if(icommand.getRequiredPermissionLevel() == EnumPermissionsLevel.CREATOR) {
+					System.out.println(user.getID());
+					if(!user.getID().toString().equals("84299205929103360")) {
+						permissionDenied(user, channel);
+						return;
+					}
+				}
+				// TODO
+				// else if(icommand.getRequiredPermissionLevel() == EnumPermissionsLevel.ADMIN) {
+				// if(user.getRolesForGuild(message.getGuild()).)
+				// }
+
 				if(parameters.length == icommand.getNumberOfParameters()) {
 					if(icommand.getCommandType() == EnumCommandType.STRING) {
 						try {
@@ -75,6 +91,15 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 	private void incorrectParameters(IUser user, IChannel channel) {
 		try {
 			channel.sendMessage("Error: Command parameters incorrect.");
+		}
+		catch(MissingPermissionsException | RateLimitException | DiscordException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void permissionDenied(IUser user, IChannel channel) {
+		try {
+			channel.sendMessage("Error: You do not have permission to use this command.");
 		}
 		catch(MissingPermissionsException | RateLimitException | DiscordException e) {
 			e.printStackTrace();
