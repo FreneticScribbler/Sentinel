@@ -26,6 +26,12 @@ public class CommandRegistry {
 				"Some may question your right to destroy ten billion people. Those who understand know that you have no right to let them live — Exterminatus Extremis http://vignette1.wikia.nocookie.net/warhammer40k/images/e/e9/Exterminatus_Retribution.jpg/revision/latest?cb=20130419190839"));
 		CommandRegistry.registerCommand("death",
 				new TextCommand("http://static.tvtropes.org/pmwiki/pub/images/deathwithcat_8690.jpg"));
+		CommandRegistry.registerCommand("xkcd", new CommandXKCD());
+		CommandRegistry.registerCommand("site", new TextCommand("http://aronajones.com"));
+		CommandRegistry.registerCommand("blog", new TextCommand("http://blog.aronajones.com"));
+		CommandRegistry.registerCommand("mm",
+				new TextCommand("http://sd.keepcalm-o-matic.co.uk/i/keep-chrome-and-witness-me.png"));
+		CommandRegistry.registerCommand("search", new CommandSearch());
 	}
 
 	public static void registerCommand(String name, ICommand command) {

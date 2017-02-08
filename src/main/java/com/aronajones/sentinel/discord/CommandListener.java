@@ -35,7 +35,7 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 				try {
 					event.getClient().logout();
 				}
-				catch(RateLimitException | DiscordException e) {
+				catch(DiscordException e) {
 					e.printStackTrace();
 				}
 			}
