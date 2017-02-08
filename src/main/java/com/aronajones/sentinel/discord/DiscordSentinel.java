@@ -32,7 +32,7 @@ public class DiscordSentinel {
 	public static void registerListeners() {
 		EventDispatcher dispatcher = INSTANCE.getDispatcher();
 		dispatcher.registerListener(new CommandListener());
-		// dispatcher.registerListener(new ConnectionListener());
+		dispatcher.registerListener(new ConnectionListener());
 		dispatcher.registerListener(new DisconnectionListener());
 	}
 }
