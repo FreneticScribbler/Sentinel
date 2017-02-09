@@ -68,6 +68,16 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 						}
 					}
 					// TODO
+					else if(icommand.getCommandType() == EnumCommandType.SPECIAL) {
+						// CommandEcho echoCommand = (CommandEcho) icommand;
+						IChannel toSendIn = message.getGuild().getChannelsByName(parameters[0]).get(0);
+						try {
+							toSendIn.sendMessage(parameters[1], true);
+						}
+						catch(RateLimitException | DiscordException | MissingPermissionsException e) {
+							e.printStackTrace();
+						}
+					}
 					else
 						commandUnrecognised(user, channel);
 				}

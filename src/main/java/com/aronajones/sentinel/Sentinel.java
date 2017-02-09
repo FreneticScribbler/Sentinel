@@ -7,7 +7,7 @@ import com.aronajones.sentinel.discord.DiscordSentinel;
 public class Sentinel {
 
 	public static final String NAME = "Sentinel";
-	public static final String VERSION = "1.0.1b";
+	public static final String VERSION = "1.0.1c";
 
 	public static final Character COMMAND_CHARACTER = '$';
 	public static final Random RNG = new Random();

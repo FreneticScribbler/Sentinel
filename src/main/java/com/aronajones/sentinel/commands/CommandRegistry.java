@@ -32,6 +32,7 @@ public class CommandRegistry {
 		CommandRegistry.registerCommand("mm",
 				new TextCommand("http://sd.keepcalm-o-matic.co.uk/i/keep-chrome-and-witness-me.png"));
 		CommandRegistry.registerCommand("search", new CommandSearch());
+		CommandRegistry.registerCommand("echo", new CommandEcho());
 	}
 
 	public static void registerCommand(String name, ICommand command) {
