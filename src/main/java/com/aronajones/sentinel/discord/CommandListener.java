@@ -3,6 +3,7 @@ package com.aronajones.sentinel.discord;
 import java.util.Arrays;
 
 import com.aronajones.sentinel.Sentinel;
+import com.aronajones.sentinel.commands.CommandEcho;
 import com.aronajones.sentinel.commands.CommandRegistry;
 import com.aronajones.sentinel.commands.EnumCommandType;
 import com.aronajones.sentinel.commands.EnumPermissionsLevel;
@@ -70,12 +71,14 @@ public class CommandListener implements IListener<MessageReceivedEvent> {
 					// TODO
 					else if(icommand.getCommandType() == EnumCommandType.SPECIAL) {
 						// CommandEcho echoCommand = (CommandEcho) icommand;
-						IChannel toSendIn = message.getGuild().getChannelsByName(parameters[0]).get(0);
-						try {
-							toSendIn.sendMessage(parameters[1], true);
-						}
-						catch(RateLimitException | DiscordException | MissingPermissionsException e) {
-							e.printStackTrace();
+						if(icommand instanceof CommandEcho) {
+							IChannel toSendIn = message.getGuild().getChannelsByName(parameters[0]).get(0);
+							try {
+								toSendIn.sendMessage(parameters[1], true);
+							}
+							catch(RateLimitException | DiscordException | MissingPermissionsException e) {
+								e.printStackTrace();
+							}
 						}
 					}
 					else

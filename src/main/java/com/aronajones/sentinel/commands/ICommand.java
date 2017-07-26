@@ -5,7 +5,11 @@ public interface ICommand {
 
 	public int getNumberOfParameters();
 
-	Object getCommandResult(String[] parameters);
+	default Object getCommandResult(String[] parameters) {
+		return null;
+	}
 
-	public EnumPermissionsLevel getRequiredPermissionLevel();
+	default public EnumPermissionsLevel getRequiredPermissionLevel() {
+		return EnumPermissionsLevel.USER;
+	}
 }

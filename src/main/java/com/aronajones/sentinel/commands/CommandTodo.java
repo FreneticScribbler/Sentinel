@@ -1,6 +1,7 @@
 package com.aronajones.sentinel.commands;
 
-public class CommandEcho implements ICommand {
+public class CommandTodo implements ICommand {
+
 	@Override
 	public EnumCommandType getCommandType() {
 		return EnumCommandType.SPECIAL;
@@ -9,5 +10,10 @@ public class CommandEcho implements ICommand {
 	@Override
 	public int getNumberOfParameters() {
 		return 2;
+	}
+
+	@Override
+	public EnumPermissionsLevel getRequiredPermissionLevel() {
+		return EnumPermissionsLevel.ADMIN;
 	}
 }

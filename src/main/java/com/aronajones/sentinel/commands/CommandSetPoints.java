@@ -2,7 +2,7 @@ package com.aronajones.sentinel.commands;
 
 import com.aronajones.sentinel.utils.StorageHandler;
 
-public class CommandSetPoints extends BaseCommand {
+public class CommandSetPoints implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

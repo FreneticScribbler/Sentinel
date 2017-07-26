@@ -1,6 +1,6 @@
 package com.aronajones.sentinel.commands;
 
-public class TextCommand extends BaseCommand {
+public class TextCommand implements ICommand {
 
 	String result;
 

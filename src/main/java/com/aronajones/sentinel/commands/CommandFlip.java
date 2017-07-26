@@ -2,7 +2,7 @@ package com.aronajones.sentinel.commands;
 
 import com.aronajones.sentinel.Sentinel;
 
-public class CommandFlip extends BaseCommand {
+public class CommandFlip implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

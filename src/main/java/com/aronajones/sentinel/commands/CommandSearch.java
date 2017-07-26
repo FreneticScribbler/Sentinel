@@ -3,7 +3,7 @@ package com.aronajones.sentinel.commands;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
-public class CommandSearch extends BaseCommand {
+public class CommandSearch implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

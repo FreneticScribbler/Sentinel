@@ -2,7 +2,7 @@ package com.aronajones.sentinel.commands;
 
 import com.aronajones.sentinel.Sentinel;
 
-public class CommandRoll extends BaseCommand {
+public class CommandRoll implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

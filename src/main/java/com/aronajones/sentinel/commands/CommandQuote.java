@@ -5,7 +5,7 @@ import java.io.FileNotFoundException;
 
 import com.aronajones.sentinel.utils.StorageHandler;
 
-public class CommandQuote extends BaseCommand {
+public class CommandQuote implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

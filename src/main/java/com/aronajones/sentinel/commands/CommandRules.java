@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-public class CommandRules extends BaseCommand {
+public class CommandRules implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

@@ -1,6 +1,6 @@
 package com.aronajones.sentinel.commands;
 
-public class CommandXKCD extends BaseCommand {
+public class CommandXKCD implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

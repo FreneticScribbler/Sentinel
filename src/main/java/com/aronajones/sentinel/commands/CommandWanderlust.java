@@ -9,7 +9,7 @@ import com.aronajones.sentinel.Sentinel;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
-public class CommandWanderlust extends BaseCommand {
+public class CommandWanderlust implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {

@@ -2,7 +2,7 @@ package com.aronajones.sentinel.commands;
 
 import java.util.ArrayList;
 
-public class CommandHelp extends BaseCommand {
+public class CommandHelp implements ICommand {
 
 	@Override
 	public EnumCommandType getCommandType() {
