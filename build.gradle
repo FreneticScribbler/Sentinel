@@ -9,6 +9,7 @@ mainClassName = 'com.aronajones.sentinel.Sentinel'
 // In this section you declare where to find the dependencies of your project
 repositories {
   jcenter()
+  mavenCentral()
   maven {
     url  "https://jitpack.io"
   }
@@ -16,4 +17,5 @@ repositories {
 // In this section you declare the dependencies for your production and test code
 dependencies {
     compile "com.github.austinv11:Discord4j:2.7.0"
+    compile "com.julienvey.trello:trello-java-wrapper:0.3.2"
 }

@@ -15,6 +15,9 @@ public class DiscordSentinel {
 		StorageHandler.readDataFromDisk();
 		login(token);
 		registerListeners();
+		// Status status = Status.game("mindgames");
+
+		// INSTANCE.changeStatus(status);
 	}
 
 	public static void login(String token) { // Returns an instance of the Discord client
@@ -34,5 +37,6 @@ public class DiscordSentinel {
 		dispatcher.registerListener(new CommandListener());
 		dispatcher.registerListener(new ConnectionListener());
 		dispatcher.registerListener(new DisconnectionListener());
+		dispatcher.registerListener(new ReadyListener());
 	}
 }

@@ -34,6 +34,7 @@ public class CommandRegistry {
 		CommandRegistry.registerCommand("search", new CommandSearch());
 		CommandRegistry.registerCommand("echo", new CommandEcho());
 		CommandRegistry.registerCommand("wanderlust", new CommandWanderlust());
+		CommandRegistry.registerCommand("todo", new CommandTodo());
 	}
 
 	public static void registerCommand(String name, ICommand command) {
