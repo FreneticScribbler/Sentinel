@@ -18,4 +18,5 @@ repositories {
 dependencies {
     compile "com.github.austinv11:Discord4j:2.7.0"
     compile "com.julienvey.trello:trello-java-wrapper:0.3.2"
+    compile "org.telegram:telegrambots:3.3"
 }

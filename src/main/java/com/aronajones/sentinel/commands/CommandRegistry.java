@@ -35,6 +35,8 @@ public class CommandRegistry {
 		CommandRegistry.registerCommand("echo", new CommandEcho());
 		CommandRegistry.registerCommand("wanderlust", new CommandWanderlust());
 		CommandRegistry.registerCommand("todo", new CommandTodo());
+		CommandRegistry.registerCommand("heresy", new TextCommand(
+				"HERESY! *BLAM* https://1d4chan.org/images/thumb/9/90/Heresy_vein-popping.png/300px-Heresy_vein-popping.png"));
 	}
 
 	public static void registerCommand(String name, ICommand command) {
